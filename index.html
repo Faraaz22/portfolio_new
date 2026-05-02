@@ -1,1 +1,421 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Faraaz Mahmood — Full Stack Developer</title>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,300;12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #FAFAF9;
+      --white: #FFFFFF;
+      --ink: #111110;
+      --ink2: #6F6E6B;
+      --ink3: #B5B3AD;
+      --border: #E8E6E1;
+      --accent: #1A1A1A;
+      --tag-bg: #F0EEE9;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--ink);
+      font-family: 'Bricolage Grotesque', sans-serif;
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 50;
+      background: rgba(250,250,249,0.94);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      height: 48px;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 36px;
+    }
+    .nav-name {
+      font-size: 14px; font-weight: 600; color: var(--ink);
+      text-decoration: none; letter-spacing: -0.01em;
+    }
+    .nav-right { display: flex; align-items: center; gap: 24px; }
+    .nav-right a {
+      font-size: 13px; color: var(--ink2); text-decoration: none;
+      transition: color 0.15s;
+    }
+    .nav-right a:hover { color: var(--ink); }
+    .nav-avail {
+      display: flex; align-items: center; gap: 6px;
+      font-size: 12px; color: #2D7D3A; font-weight: 500;
+    }
+    .dot { width: 6px; height: 6px; border-radius: 50%; background: #2D7D3A; animation: pulse 2.5s infinite; }
+    @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.3} }
+
+    /* ── LAYOUT ── */
+    .page {
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 72px 36px 48px;
+      display: grid;
+      grid-template-columns: 260px 1fr;
+      grid-template-rows: auto;
+      gap: 0;
+      min-height: 100vh;
+    }
+
+    /* ── LEFT COLUMN (sticky) ── */
+    .left {
+      padding: 32px 32px 32px 0;
+      border-right: 1px solid var(--border);
+      position: sticky;
+      top: 48px;
+      height: calc(100vh - 48px);
+      display: flex;
+      flex-direction: column;
+      gap: 28px;
+      overflow-y: auto;
+    }
+    .left::-webkit-scrollbar { display: none; }
+
+    .name {
+      font-size: 26px;
+      font-weight: 800;
+      line-height: 1.1;
+      letter-spacing: -0.03em;
+      color: var(--ink);
+    }
+    .title-line {
+      font-size: 13px;
+      color: var(--ink2);
+      font-weight: 400;
+      margin-top: 4px;
+    }
+
+    .left-section-label {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 9px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--ink3);
+      margin-bottom: 10px;
+    }
+
+    .bio {
+      font-size: 13px;
+      color: var(--ink2);
+      line-height: 1.7;
+    }
+    .bio strong { color: var(--ink); font-weight: 600; }
+
+    .skills-wrap { display: flex; flex-direction: column; gap: 12px; }
+    .skill-row {}
+    .skill-row-label {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 9px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--ink3);
+      margin-bottom: 5px;
+    }
+    .tags { display: flex; flex-wrap: wrap; gap: 4px; }
+    .tag {
+      font-size: 11px;
+      background: var(--tag-bg);
+      color: var(--ink2);
+      border-radius: 3px;
+      padding: 2px 8px;
+      font-weight: 500;
+    }
+    .tag.hi { background: var(--ink); color: #fff; }
+
+    .contact-list { display: flex; flex-direction: column; gap: 7px; }
+    .contact-list a {
+      font-size: 12px; color: var(--ink2); text-decoration: none;
+      display: flex; align-items: center; gap: 7px; transition: color 0.15s;
+      font-family: 'IBM Plex Mono', monospace;
+    }
+    .contact-list a:hover { color: var(--ink); }
+    .contact-list a span { color: var(--ink3); }
+
+    .edu-block { font-size: 12px; color: var(--ink2); line-height: 1.6; }
+    .edu-block strong { color: var(--ink); font-size: 13px; font-weight: 600; display: block; margin-bottom: 1px; }
+
+    /* ── RIGHT COLUMN ── */
+    .right {
+      padding: 32px 0 32px 36px;
+      display: flex;
+      flex-direction: column;
+      gap: 40px;
+    }
+
+    .r-section {}
+    .r-label {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 9px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--ink3);
+      margin-bottom: 14px;
+      display: flex; align-items: center; gap: 10px;
+    }
+    .r-label::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+
+    /* PROJECTS */
+    .proj-list { display: flex; flex-direction: column; gap: 10px; }
+    .proj {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 16px 18px;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 8px 16px;
+      align-items: start;
+      text-decoration: none;
+      color: inherit;
+      transition: border-color 0.15s, box-shadow 0.15s;
+    }
+    .proj:hover { border-color: var(--ink3); box-shadow: 0 2px 12px rgba(0,0,0,0.05); }
+    .proj-name { font-size: 14px; font-weight: 700; color: var(--ink); }
+    .proj-desc { font-size: 12.5px; color: var(--ink2); line-height: 1.6; margin-top: 3px; grid-column: 1; }
+    .proj-chips { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 8px; grid-column: 1 / -1; }
+    .chip {
+      font-family: 'IBM Plex Mono', monospace; font-size: 10px;
+      background: var(--tag-bg); color: var(--ink2);
+      padding: 2px 7px; border-radius: 3px;
+    }
+    .proj-link { font-size: 14px; color: var(--ink3); transition: color 0.15s; }
+    .proj:hover .proj-link { color: var(--ink); }
+
+    /* EXPERIENCE */
+    .exp-list { display: flex; flex-direction: column; gap: 10px; }
+    .exp {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 16px 18px;
+    }
+    .exp-head {
+      display: flex; justify-content: space-between; align-items: flex-start;
+      margin-bottom: 10px; gap: 8px;
+    }
+    .exp-co { font-size: 14px; font-weight: 700; color: var(--ink); }
+    .exp-role { font-size: 12px; color: var(--ink2); margin-top: 1px; }
+    .exp-date {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 10px; color: var(--ink3); white-space: nowrap;
+    }
+    .exp-pts { list-style: none; display: flex; flex-direction: column; gap: 5px; }
+    .exp-pts li {
+      font-size: 12.5px; color: var(--ink2); padding-left: 14px;
+      position: relative; line-height: 1.55;
+    }
+    .exp-pts li::before { content: '·'; position: absolute; left: 3px; color: var(--ink3); font-size: 16px; line-height: 1; top: 0px; }
+
+    @media(max-width: 680px) {
+      .page { grid-template-columns: 1fr; padding: 64px 20px 40px; }
+      .left { position: static; height: auto; border-right: none; border-bottom: 1px solid var(--border); padding: 0 0 28px; }
+      .right { padding: 28px 0 0; }
+      nav { padding: 0 20px; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-name" href="#">Faraaz Mahmood</a>
+  <div class="nav-right">
+    <a href="https://github.com/Faraaz22" target="_blank">GitHub</a>
+    <a href="https://linkedin.com/in/faraaz-mahmood" target="_blank">LinkedIn</a>
+    <a href="mailto:faraazmahmood22@gmail.com">Email</a>
+    <div class="nav-avail"><div class="dot"></div> Open to work</div>
+  </div>
+</nav>
+
+<div class="page">
+
+  <!-- LEFT -->
+  <aside class="left">
+
+    <div>
+      <div class="name">Faraaz<br>Mahmood</div>
+      <div class="title-line">Full Stack Developer · Delhi NCR</div>
+    </div>
+
+    <div>
+      <div class="left-section-label">About</div>
+      <p class="bio">
+        I build web apps end to end — <strong>APIs, databases, auth, queues</strong> through to <strong>React UIs and cloud deploys</strong>. Currently shipping production features at Geeky Owls. Graduating May 2026, available immediately.
+      </p>
+    </div>
+
+    <div>
+      <div class="left-section-label">Skills</div>
+      <div class="skills-wrap">
+        <div class="skill-row">
+          <div class="skill-row-label">Backend</div>
+          <div class="tags">
+            <span class="tag hi">NestJS</span>
+            <span class="tag hi">FastAPI</span>
+            <span class="tag">Node.js</span>
+            <span class="tag">Express</span>
+          </div>
+        </div>
+        <div class="skill-row">
+          <div class="skill-row-label">Frontend</div>
+          <div class="tags">
+            <span class="tag hi">Next.js</span>
+            <span class="tag hi">React</span>
+            <span class="tag">React Native</span>
+            <span class="tag">Tailwind</span>
+          </div>
+        </div>
+        <div class="skill-row">
+          <div class="skill-row-label">Database</div>
+          <div class="tags">
+            <span class="tag hi">PostgreSQL</span>
+            <span class="tag">MongoDB</span>
+            <span class="tag">Prisma</span>
+            <span class="tag">SQLAlchemy</span>
+          </div>
+        </div>
+        <div class="skill-row">
+          <div class="skill-row-label">Infra</div>
+          <div class="tags">
+            <span class="tag hi">Docker</span>
+            <span class="tag hi">Redis</span>
+            <span class="tag">BullMQ</span>
+            <span class="tag">GCP</span>
+            <span class="tag">CI/CD</span>
+          </div>
+        </div>
+        <div class="skill-row">
+          <div class="skill-row-label">Languages</div>
+          <div class="tags">
+            <span class="tag hi">TypeScript</span>
+            <span class="tag">JavaScript</span>
+            <span class="tag">Python</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <div class="left-section-label">Contact</div>
+      <div class="contact-list">
+        <a href="mailto:faraazmahmood22@gmail.com"><span>✉</span> faraazmahmood22@gmail.com</a>
+        <a href="tel:+919643320078"><span>✆</span> +91 96433 20078</a>
+        <a href="https://github.com/Faraaz22" target="_blank"><span>⌥</span> github.com/Faraaz22</a>
+        <a href="https://linkedin.com/in/faraaz-mahmood" target="_blank"><span>in</span> faraaz-mahmood</a>
+      </div>
+    </div>
+
+    <div>
+      <div class="left-section-label">Education</div>
+      <div class="edu-block">
+        <strong>B.Tech — Computer Science</strong>
+        Dr. APJ Abdul Kalam Technical University<br>
+        2022 – 2026 · CGPA 7.8 / 10
+      </div>
+    </div>
+
+  </aside>
+
+  <!-- RIGHT -->
+  <main class="right">
+
+    <!-- PROJECTS -->
+    <div class="r-section">
+      <div class="r-label">Projects</div>
+      <div class="proj-list">
+
+        <a class="proj" href="https://github.com/Faraaz22" target="_blank">
+          <div>
+            <div class="proj-name">InboxAI</div>
+            <div class="proj-desc">Event-driven Gmail automation — classifies emails with an LLM, routes through a rules engine, auto-forwards, creates tasks, pings webhooks. Real OAuth, Gmail Pub/Sub, idempotent processing, encrypted token storage.</div>
+          </div>
+          <div class="proj-link">↗</div>
+          <div class="proj-chips">
+            <span class="chip">NestJS</span><span class="chip">TypeScript</span><span class="chip">PostgreSQL</span>
+            <span class="chip">Redis</span><span class="chip">BullMQ</span><span class="chip">Gemini</span><span class="chip">Docker</span><span class="chip">GitHub Actions</span>
+          </div>
+        </a>
+
+        <a class="proj" href="https://github.com/Faraaz22" target="_blank">
+          <div>
+            <div class="proj-name">Nano</div>
+            <div class="proj-desc">Multi-tenant workspace SaaS — Turborepo monorepo, OWNER/ADMIN/MEMBER roles, optimistic locking for concurrent edits, Google OAuth, access/refresh tokens, deployed to GCP Cloud Run.</div>
+          </div>
+          <div class="proj-link">↗</div>
+          <div class="proj-chips">
+            <span class="chip">Next.js</span><span class="chip">NestJS</span><span class="chip">Prisma</span>
+            <span class="chip">PostgreSQL</span><span class="chip">GCP</span><span class="chip">Docker</span><span class="chip">JWT</span>
+          </div>
+        </a>
+
+        <a class="proj" href="https://github.com/Faraaz22" target="_blank">
+          <div>
+            <div class="proj-name">Evently</div>
+            <div class="proj-desc">Full-stack event booking and ticketing platform — JWT auth, RBAC, Redux Toolkit with session persistence, ticket validation, and dynamic event management.</div>
+          </div>
+          <div class="proj-link">↗</div>
+          <div class="proj-chips">
+            <span class="chip">Next.js</span><span class="chip">MongoDB</span><span class="chip">Redux Toolkit</span><span class="chip">TypeScript</span>
+          </div>
+        </a>
+
+      </div>
+    </div>
+
+    <!-- EXPERIENCE -->
+    <div class="r-section">
+      <div class="r-label">Experience</div>
+      <div class="exp-list">
+
+        <div class="exp">
+          <div class="exp-head">
+            <div>
+              <div class="exp-co">Geeky Owls</div>
+              <div class="exp-role">Software Developer — Full Stack & React Native · Mohali, India</div>
+            </div>
+            <div class="exp-date">Nov 2025 – Present</div>
+          </div>
+          <ul class="exp-pts">
+            <li>Building a production ATS platform with Next.js, NestJS, Zustand, and PostgreSQL for real enterprise hiring pipelines.</li>
+            <li>Built and shipped a React Native app for NutriCRM — real-time diet tracking, vitals, and user profile management.</li>
+            <li>Developed AI generation flow and shareable card builder for Greetify, an AI-powered greeting platform.</li>
+            <li>Designed backend schemas and REST APIs for a gym app — workouts, trainers, sets/reps, per-hand weight tracking.</li>
+            <li>Implemented Redis caching and BullMQ async queuing for background jobs and performance optimization.</li>
+          </ul>
+        </div>
+
+        <div class="exp">
+          <div class="exp-head">
+            <div>
+              <div class="exp-co">Unusual Consultant</div>
+              <div class="exp-role">Full Stack Developer · Part-time, Remote</div>
+            </div>
+            <div class="exp-date">Sept – Nov 2025</div>
+          </div>
+          <ul class="exp-pts">
+            <li>Designed and optimized PostgreSQL schemas for query performance and transactional reliability.</li>
+            <li>Built REST APIs with FastAPI + SQLAlchemy and JWT-based Mentor/Mentee RBAC.</li>
+            <li>Containerized the full stack with Docker and Docker Compose for production deployments.</li>
+            <li>Built multi-step onboarding flows in Next.js translated from Figma designs using Tailwind CSS.</li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+
+  </main>
+</div>
+
+</body>
+</html>
